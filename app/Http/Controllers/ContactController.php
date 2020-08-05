@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Contact;
 use Validator;
 use DB;
+use File;
 
 class ContactController extends Controller
 {
@@ -132,6 +133,7 @@ class ContactController extends Controller
         $values = array('first_name' => $item['name'],'last_name' => $item['lastName'],'phone' => str_replace(' ', '', $item['phone']));
         DB::table('contacts')->insert($values);
       }
+      File::delete(public_path('uploadedfiles').'/'.$new_xml_name);
       return response()->json([
        'message'   => 'Image Upload Successfully',
        'uploaded_image' => '',
