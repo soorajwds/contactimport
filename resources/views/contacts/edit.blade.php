@@ -32,7 +32,6 @@
                 <label for="phone">Phone:</label>
                 <input type="text" class="form-control" name="phone" value={{ $contact->phone }} />
             </div>
-            
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>

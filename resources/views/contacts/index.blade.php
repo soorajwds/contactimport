@@ -73,7 +73,7 @@
 <script>
 $(document).ready(function(){
 
- $('#upload_form').on('submit', function(event){ alert('hai');
+ $('#upload_form').on('submit', function(event){
   event.preventDefault();
   $.ajax({
    url:"{{ route('contacts.action') }}",
@@ -88,6 +88,7 @@ $(document).ready(function(){
     $('#message').css('display', 'block');
     $('#message').html(data.message);
     $('#message').addClass(data.class_name);
+    setTimeout(function(){ location.reload(); }, 1000);
    }
   })
  });

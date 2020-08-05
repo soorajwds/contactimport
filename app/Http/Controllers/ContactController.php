@@ -48,7 +48,7 @@ class ContactController extends Controller
         $contact = new Contact([
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
-            'phone' => $request->get('phone')
+            'phone' => str_replace(' ', '', $request->get('phone'))
         ]);
         $contact->save();
         return redirect('/contacts')->with('success', 'Contact saved!');
@@ -95,7 +95,7 @@ class ContactController extends Controller
         $contact = Contact::find($id);
         $contact->first_name =  $request->get('first_name');
         $contact->last_name = $request->get('last_name');
-        $contact->phone = $request->get('phone');
+        $contact->phone = str_replace(' ', '', $request->get('phone'));
         $contact->save();
 
         return redirect('/contacts')->with('success', 'Contact updated!');
@@ -129,7 +129,7 @@ class ContactController extends Controller
       $xml = new \SimpleXMLElement($string);
       $array = json_decode(json_encode($xml), true);
       foreach($array['contact'] as $item){
-        $values = array('first_name' => $item['name'],'last_name' => $item['lastName'],'phone' => $item['phone']);
+        $values = array('first_name' => $item['name'],'last_name' => $item['lastName'],'phone' => str_replace(' ', '', $item['phone']));
         DB::table('contacts')->insert($values);
       }
       return response()->json([
